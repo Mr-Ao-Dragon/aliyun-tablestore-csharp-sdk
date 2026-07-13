@@ -67,6 +67,7 @@
     <Compile Include="UnitTest\SQLTest.cs" />
     <Compile Include="UnitTest\TableOperationTest.cs" />
     <Compile Include="UnitTest\OtsUtilsTest.cs" />
+    <Compile Include="UnitTest\StsTest.cs" />
   </ItemGroup>
 
   <ItemGroup>
