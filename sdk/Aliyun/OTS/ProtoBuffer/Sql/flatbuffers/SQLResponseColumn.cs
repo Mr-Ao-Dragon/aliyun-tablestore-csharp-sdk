@@ -12,7 +12,6 @@ namespace com.alicloud.openservices.tablestore.core.protocol.sql.flatbuffers
     {
         private Table __p;
         public ByteBuffer ByteBuffer { get { return __p.bb; } }
-        public static void ValidateVersion() { FlatBufferConstants.FLATBUFFERS_1_12_0(); }
         public static SQLResponseColumn GetRootAsSQLResponseColumn(ByteBuffer _bb) { return GetRootAsSQLResponseColumn(_bb, new SQLResponseColumn()); }
         public static SQLResponseColumn GetRootAsSQLResponseColumn(ByteBuffer _bb, SQLResponseColumn obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
         public void __init(int _i, ByteBuffer _bb) { __p = new Table(_i, _bb); }

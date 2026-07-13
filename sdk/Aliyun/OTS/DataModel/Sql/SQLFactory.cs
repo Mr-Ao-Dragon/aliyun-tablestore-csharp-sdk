@@ -1,6 +1,8 @@
 using System;
+#if NETSTANDARD2_0
 using com.alicloud.openservices.tablestore.core.protocol.sql.flatbuffers;
 using Google.FlatBuffers;
+#endif
 using Google.ProtocolBuffers;
 
 namespace Aliyun.OTS.DataModel.SQL
@@ -36,6 +38,7 @@ namespace Aliyun.OTS.DataModel.SQL
         {
             switch (version)
             {
+#if NETSTANDARD2_0
                 case SQLPayloadVersion.SQLFlatBuffers:
                     if (rows.IsEmpty)
                     {
@@ -45,6 +48,7 @@ namespace Aliyun.OTS.DataModel.SQL
                     ByteBuffer rowBuffer = new ByteBuffer(rows.ToByteArray());
                     SQLResponseColumns columns = SQLResponseColumns.GetRootAsSQLResponseColumns(rowBuffer);
                     return new SQLRowsFBsColumnBased(columns);
+#endif
                 default:
                     throw new NotSupportedException(string.Format("Do not support other SQL payload version: {0}", version));
             }

@@ -16,17 +16,22 @@
     <RootNamespace>Aliyun.OTS</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
-    <DefineConstants>$(DefineConstants);UNSAFE_BYTEBUFFER;ENABLE_SPAN_T</DefineConstants>
+    <DefineConstants>$(DefineConstants);UNSAFE_BYTEBUFFER</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Bosima.Google.ProtocolBuffers" Version="1.0.1" />
-    <PackageReference Include="Google.Protobuf.Tools" Version="3.6.1" />
-    <PackageReference Include="KdSoft.FlatBuffers" Version="1.12.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Google.FlatBuffers" Version="25.2.10" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="System.Net.Http">
       <Version>4.3.4</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
+    <Compile Remove="Aliyun\OTS\ProtoBuffer\Sql\flatbuffers\**" />
+    <Compile Remove="Aliyun\OTS\DataModel\Sql\SQLRowsFBsColumnBased.cs" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
     <PackageReference Include="System.Net.Http">

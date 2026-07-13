@@ -10,7 +10,7 @@ namespace Aliyun.OTS.UnitTest
     class StsTest
     {
         private const string TestEndPoint = "http://test.cn-hangzhou.ots.aliyun.com:80";
-        private const string TestAccessKeyID = "test-access-key-id";
+        private const string TestAccessKeyId = "test-access-key-id";
         private const string TestAccessKeySecret = "test-access-key-secret";
         private const string TestInstanceName = "test-instance";
         private const string TestSecurityToken = "test-security-token-sts";
@@ -20,11 +20,8 @@ namespace Aliyun.OTS.UnitTest
         /// </summary>
         class CapturingHandler : PipelineHandler
         {
-            public Context CapturedContext;
-
             public override void HandleBefore(Context context)
             {
-                CapturedContext = context;
             }
 
             public override void HandleAfter(Context context) { }
@@ -34,7 +31,7 @@ namespace Aliyun.OTS.UnitTest
         {
             return new OTSClientConfig(
                 TestEndPoint,
-                TestAccessKeyID,
+                TestAccessKeyId,
                 TestAccessKeySecret,
                 TestInstanceName,
                 securityToken
@@ -129,11 +126,12 @@ namespace Aliyun.OTS.UnitTest
 
             handler.HandleBefore(context);
 
-            var headers = context.HttpRequestHeaders;
+            var headers = new Dictionary<string, string>(context.HttpRequestHeaders);
+            headers.Remove("x-ots-signature");
             string expectedSignature = ComputeExpectedSignature(
                 headers, context.APIName, TestAccessKeySecret);
 
-            Assert.AreEqual(expectedSignature, headers["x-ots-signature"],
+            Assert.AreEqual(expectedSignature, context.HttpRequestHeaders["x-ots-signature"],
                 "Signature must include x-ots-ststoken in HMAC computation");
         }
 
