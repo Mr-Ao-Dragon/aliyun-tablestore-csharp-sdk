@@ -39,7 +39,12 @@ namespace Aliyun.OTS
         /// OTS的Access Key Secret，通过官方网站申请。
         /// </summary>
         public string AccessKeySecret { get; set; }
-        
+
+        /// <summary>
+        /// OTS的Secret Token，通过扮演角色获得。
+        /// </summary>
+
+        public string SecurityToken { get; set; } = null;
         /// <summary>
         /// OTS实例名，通过官方网站控制台创建。
         /// </summary>
@@ -94,7 +99,9 @@ namespace Aliyun.OTS
         /// <param name="accessKeyID">OTS的Access Key ID</param>
         /// <param name="accessKeySecret">OTS的Access Key Secret</param>
         /// <param name="instanceName">OTS实例名</param>
-        public OTSClientConfig(string endPoint, string accessKeyID, string accessKeySecret, string instanceName)
+        /// <param name="securityToken"></param>
+        public OTSClientConfig(string endPoint, string accessKeyID, string accessKeySecret, string instanceName,
+            string securityToken = null)
         {
             if (string.IsNullOrEmpty(endPoint))
             {
@@ -119,6 +126,7 @@ namespace Aliyun.OTS
             EndPoint = endPoint.Trim();
             AccessKeyID = accessKeyID.Trim();
             AccessKeySecret = accessKeySecret.Trim();
+            SecurityToken = securityToken?.Trim();
             InstanceName = instanceName.Trim();
             ConnectionLimit = DefaultConnectionLimit;
             APIVersion = DefaultAPIVersion;

@@ -85,6 +85,10 @@ namespace Aliyun.OTS.Handler
             // Step 3, other headers
             headers.Add("x-ots-apiversion", context.ClientConfig.APIVersion);
             headers.Add("x-ots-accesskeyid", context.ClientConfig.AccessKeyID);
+            if (!string.IsNullOrEmpty(context.ClientConfig.SecurityToken))
+            {
+                headers.Add("x-ots-ststoken", context.ClientConfig.SecurityToken);
+            }
             headers.Add("x-ots-instancename", context.ClientConfig.InstanceName);
 
             headers.Add("x-ots-user-agent", context.ClientConfig.UserAgent);

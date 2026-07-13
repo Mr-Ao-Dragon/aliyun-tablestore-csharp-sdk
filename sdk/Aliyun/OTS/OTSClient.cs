@@ -1,4 +1,4 @@
-﻿/*
+﻿﻿/*
  *  Trade secret of Alibaba Group R&D.
  *  Copyright (c) 2015 Alibaba Group R&D. 
  *
@@ -64,9 +64,9 @@ namespace Aliyun.OTS
         /// <param name="accessKeyID">OTS的Access Key ID，通过官方网站申请。</param>
         /// <param name="accessKeySecret">OTS的Access Key Secret，通过官方网站申请。</param>
         /// <param name="instanceName">OTS实例名，通过官方网站控制台创建。</param>
-        /// 
-        public OTSClient(string endPoint, string accessKeyID, string accessKeySecret, string instanceName)
-            : this(new OTSClientConfig(endPoint, accessKeyID, accessKeySecret, instanceName)) { }
+        /// <param name="securityToken"></param>
+        public OTSClient(string endPoint, string accessKeyID, string accessKeySecret, string instanceName, string securityToken = null)
+            : this(new OTSClientConfig(endPoint, accessKeyID, accessKeySecret, instanceName, securityToken)) { }
 
         // public OTSClient(string configFileName) { }
         // TODO enable client config file later
